@@ -13,6 +13,10 @@ exports.up = function(knex) {
 
         .createTable('resources', tbl => {
             tbl.increments();
+            tbl.integer('id')
+                .unsigned()
+                .references('id')
+                .inTable('projects');
             tbl.text('name', 128)
                 .notNullable()
             tbl.text('description')
