@@ -1,6 +1,6 @@
 const express = require('express')
 
-const Projects = require('./projectModel.js')
+const Resources = require('./resourcesModel.js')
 
 const router = express.Router()
 
@@ -8,24 +8,24 @@ const router = express.Router()
 
 
 router.get('/', (req, res) => {
-    Projects.find()
-    .then(Projects => {
-      res.json(Projects);
+    Resources.find()
+    .then(Resources => {
+      res.json(Resources);
     })
     .catch(err => {
-      res.status(500).json({ message: 'Failed to get Projects' });
+      res.status(500).json({ message: 'Failed to get Resources' });
     });
   });
   
   
-  router.post('/:id/projects', (req, res) => {
-    const stepData = req.body;
+  router.post('/:id/tasks', (req, res) => {
+    const Res = req.body;
     const { id } = req.params; 
   
-    Projects.findById(id)
+    Resources.findById(id)
     .then(scheme => {
       if (scheme) {
-        Projects.addStep(stepData, id)
+        Resources.addRes(Res, id)
         .then(step => {
           res.status(201).json(step);
         })
@@ -40,7 +40,3 @@ router.get('/', (req, res) => {
   
   
   module.exports = router;
-
-
-
-

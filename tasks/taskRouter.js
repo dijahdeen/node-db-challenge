@@ -1,6 +1,6 @@
 const express = require('express')
 
-const Projects = require('./projectModel.js')
+const Tasks = require('./taskModel.js')
 
 const router = express.Router()
 
@@ -8,24 +8,24 @@ const router = express.Router()
 
 
 router.get('/', (req, res) => {
-    Projects.find()
-    .then(Projects => {
-      res.json(Projects);
+    Tasks.find()
+    .then(Tasks => {
+      res.json(Tasks);
     })
     .catch(err => {
-      res.status(500).json({ message: 'Failed to get Projects' });
+      res.status(500).json({ message: 'Failed to get tasks' });
     });
   });
   
   
-  router.post('/:id/projects', (req, res) => {
-    const stepData = req.body;
+  router.post('/:id/tasks', (req, res) => {
+    const stepTasks = req.body;
     const { id } = req.params; 
   
-    Projects.findById(id)
+    Tasks.findById(id)
     .then(scheme => {
       if (scheme) {
-        Projects.addStep(stepData, id)
+        Tasks.addTasks(stepTasks, id)
         .then(step => {
           res.status(201).json(step);
         })
@@ -40,7 +40,3 @@ router.get('/', (req, res) => {
   
   
   module.exports = router;
-
-
-
-
